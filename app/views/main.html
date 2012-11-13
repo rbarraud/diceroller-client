@@ -1,0 +1,52 @@
+<h1>Hi {{user.name}}</h1>
+<p>You now have landed on the dice roller page.</p>
+
+<div class="row">
+  <div class="span8">
+    <div ng-show="group">
+      <h3>Rolls for Group '{{group.name}}'</h3>
+
+      <ul>
+        <li ng-repeat="roll in group">{{roll}}</li>
+      </ul>
+    </div>
+    <div ng-hide="group">
+      <h3>Roll'em cowboy!</h3>
+      You have no groups! Please select or create one.
+    </div>
+    <div id="addGroup" class="modal hide fade in" style="display: none; ">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Add Group</h3>
+      </div>
+      <div class="modal-body">
+        <p>You need to specify a name of the group and the password to use for the group. Neither are case sensitive.</p>
+        <p><label for="groupName">Group Name</label><input id="groupName" type="text" ng-model="groupName" size="30" maxlength="250" autofocus></p>
+        <p><label for="groupPassword">Group Password</label><input id="groupPassword" ng-model="groupPassword" type="text" size="30" maxlength="250"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-success" ng-class="{disabled: newGroupInvalid()}" ng-click="addGroup">Create</a>
+        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+      </div>
+    </div>
+  </div>
+  <div class="span4">
+    <h3>Groups</h3>
+    <span ng-hide="userGroups.length">You have no groups, go ahead, add one!</span>
+    <div>
+      <ul>
+        <li ng-repeat="g in userGroups" >
+          <a ng-click="selectGroup(g)" ng-show="group != g">{{g.name}}</a>
+          <span ng-show="group == g">{{g.name}}</span>
+        </li>
+      </ul>
+    </div>
+    <div style="padding-top: 20px;">
+        <a class="btn btn-primary" ng-click="addGroup()">
+        Add group
+      </a>
+    </div>
+  </div>
+</div>
+
+
